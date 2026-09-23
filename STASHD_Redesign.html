@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STASHD | Custom Cleats & Streetwear Grails</title>
+<meta name="description" content="Authenticated streetwear grails & 1-of-1 custom cleats. Locked in heat. Custom built.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Using Kanit for headers to match the wide, aggressive, italic stance of the logo, and Inter for body text -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Kanit:ital,wght@0,500;0,700;1,800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* Updated Color Palette based on logo */
+    --bg: #050505;          /* Deepest black for background */
+    --bg-alt: #121214;      /* Slightly elevated dark grey for cards */
+    --line: #26262a;        /* Subtle borders */
+    --ink: #ffffff;         /* Crisp white text */
+    --muted: #888891;       /* Secondary text */
+    --neon: #39ff14;        /* Electric neon green from the logo's spark */
+    --neon-glow: rgba(57, 255, 20, 0.2); 
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Custom text selection to match brand */
+  ::selection {
+    background: var(--neon);
+    color: #000;
+  }
+
+  header {
+    position: sticky; 
+    top: 0; 
+    z-index: 100;
+    padding-top: env(safe-area-inset-top, 0px);
+    background: rgba(5, 5, 5, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .headwrap {
+    max-width: 1100px; 
+    margin: 0 auto;
+    padding: 20px 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .brand-logo-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 4px;
+    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8));
+    cursor: pointer;
+  }
+
+  .brand-text {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-style: italic;
+    font-size: 2.2rem;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .brand-tm {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    font-style: normal;
+    font-weight: 600;
+    position: absolute;
+    top: 2px;
+    right: -16px;
+    color: var(--neon);
+  }
+
+  .brand-spark {
+    position: absolute;
+    bottom: -4px;
+    right: -8px;
+    width: 38px;
+    height: 38px;
+    z-index: -1;
+  }
+
+  .tagline {
+    color: var(--muted); 
+    font-size: 0.85rem; 
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  nav {
+    display: flex; 
+    gap: 24px; 
+    overflow-x: auto;
+    padding: 16px 20px 16px; 
+    max-width: 1100px; 
+    margin: 0 auto;
+    /* Hide scrollbar for a cleaner look */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+    -webkit-overflow-scrolling: touch;
+  }
+  nav::-webkit-scrollbar { display: none; }
+
+  nav a {
+    color: var(--muted); 
+    text-decoration: none; 
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap; 
+    padding-bottom: 4px; 
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  nav a:hover, nav a:focus {
+    color: var(--ink); 
+    border-color: var(--neon);
+    text-shadow: 0 0 8px var(--neon-glow);
+  }
+
+  main {
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 48px 20px 80px;
+  }
+
+  .intro {
+    max-width: 600px; 
+    margin-bottom: 56px;
+  }
+  
+  .intro h1 {
+    font-family: 'Kanit', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  
+  .intro h1 span {
+    color: var(--neon);
+  }
+
+  .intro p {
+    color: var(--muted); 
+    line-height: 1.6; 
+    font-size: 1.05rem;
+  }
+
+  section.cat {
+    margin-bottom: 64px; 
+    scroll-margin-top: 140px;
+  }
+
+  .cat-head {
+    display: flex; 
+    align-items: baseline; 
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px; 
+    margin-bottom: 24px;
+  }
+
+  .cat-head h2 {
+    font-family: 'Kanit', sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .cat-count {
+    background: var(--line);
+    color: var(--ink);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @media(min-width: 768px){
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media(min-width: 1024px){
+    .grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .item {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+
+  .item:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 12px var(--neon-glow);
+  }
+
+  .item .frame {
+    aspect-ratio: 1/1;
+    background: #09090b;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .item img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .item:hover img {
+    transform: scale(1.05);
+  }
+
+  .item .cap {
+    padding: 16px;
+    font-size: 0.95rem;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .item .cap .sub {
+    color: var(--muted); 
+    font-size: 0.85rem; 
+    font-weight: 400;
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .price-tag {
+    color: var(--neon);
+    font-weight: 600;
+  }
+
+  .pending {
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    padding: 40px 20px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    text-align: center;
+    background: var(--bg-alt);
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 40px 20px 60px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  
+  footer a {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  
+  footer a:hover {
+    color: var(--neon);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headwrap">
+    <div class="brand-logo-container">
+      <div class="brand-text">STASHD<span class="brand-tm">TM</span></div>
+      <svg class="brand-spark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 60 L45 55 L70 10 L65 50 L95 40 L70 65 L60 95 L50 65 Z" fill="#39ff14" />
+      </svg>
+    </div>
+    <div class="tagline">Locked in heat. Custom built.</div>
+  </div>
+  <nav>
+    <a href="#hoodies">Hoodies/Jackets</a>
+    <a href="#shirts">Shirts</a>
+    <a href="#pants">Pants</a>
+    <a href="#shorts">Shorts</a>
+    <a href="#headwear">Headwear</a>
+    <a href="#bags">Bags</a>
+    <a href="#footwear">Footwear</a>
+  </nav>
+</header>
+
+<main>
+  <div class="intro">
+    <h1>What's in the <span>vault</span> right now</h1>
+    <p>A running catalog of current authenticated pieces and custom projects. Drops are added as soon as they hit the lab. Tap a category below to explore the stash.</p>
+  </div>
+
+  <section class="cat" id="hoodies">
+    <div class="cat-head"><h2>Hoodies & Outerwear</h2><span class="cat-count">2 DROPS</span></div>
+    <div class="grid">
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1b5JsLIYIhiUsbwAGPDm2AbUFVspriwvr&sz=w800" alt="Hoodie / Jacket"></div>
+        <div class="cap">Hoodie / Jacket<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=13BoEYnRxqeYI1P35Xep1JKXqSiITILPA&sz=w800" alt="Hoodie / Jacket"></div>
+        <div class="cap">Hoodie / Jacket<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat" id="shirts">
+    <div class="cat-head"><h2>Tees & Tops</h2><span class="cat-count">2 DROPS</span></div>
+    <div class="grid">
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1KYvrs2jSuLhxj8guBnFN-xMHB6bUghky&sz=w800" alt="Shirt"></div>
+        <div class="cap">Shirt<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1H_SNTWpw0XRHGzK64z6S7Dk9YCgiHKl4&sz=w800" alt="Shirt"></div>
+        <div class="cap">Shirt<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat" id="pants">
+    <div class="cat-head"><h2>Pants</h2><span class="cat-count">2 DROPS</span></div>
+    <div class="grid">
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1B0SCpE1mYGEFpMuthKN25dOO1WjdFl_a&sz=w800" alt="Pants"></div>
+        <div class="cap">Pants<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1yP4XuY3juvHkIQDFtGBFNXpGV_qi7uDy&sz=w800" alt="Pants"></div>
+        <div class="cap">Pants<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat" id="shorts">
+    <div class="cat-head"><h2>Shorts</h2><span class="cat-count">2 DROPS</span></div>
+    <div class="grid">
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1t_liRhkj12f9jLKhNv8PsfevlVl4blNn&sz=w800" alt="Shorts"></div>
+        <div class="cap">Shorts<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1VlhEw3R1ey8DvBtpFIyHWSzAsY6XMBW-&sz=w800" alt="Shorts"></div>
+        <div class="cap">Shorts<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat" id="headwear">
+    <div class="cat-head"><h2>Headwear</h2><span class="cat-count">2 DROPS</span></div>
+    <div class="grid">
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1Ne-USV7x6B9V2WYH413NuDfndFFHOrng&sz=w800" alt="Headwear"></div>
+        <div class="cap">Headwear<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1hlQshTnBCWIptywN_WFMgO_c4C_vPEkR&sz=w800" alt="Headwear"></div>
+        <div class="cap">Headwear<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat" id="bags">
+    <div class="cat-head"><h2>Bags</h2><span class="cat-count">2 DROPS</span></div>
+    <div class="grid">
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1bLOIGFm-nVWitZ4MNLRDR-6vPKJlQzIM&sz=w800" alt="Bag"></div>
+        <div class="cap">Bag<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+      <div class="item">
+        <div class="frame"><img src="https://drive.google.com/thumbnail?id=1sbQpVkGkJEIz_Sw4v5GrSvrNwWYMODFS&sz=w800" alt="Bag"></div>
+        <div class="cap">Bag<div class="sub"><span>edit name here</span> <span class="price-tag">$000</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat" id="footwear">
+    <div class="cat-head"><h2>Custom Footwear & Cleats</h2><span class="cat-count">COMING SOON</span></div>
+    <div class="pending">Footwear and custom cleat slots will be unlocked soon. Keep an eye on our socials.</div>
+  </section>
+</main>
+
+<footer>
+  <p>STASHD — <a href="#">DM on Instagram for pricing &amp; custom inquiries</a></p>
+</footer>
+
+</body>
+</html>
